@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Morphological Techniques</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://yourdomain.com/path-to-your-face-morph-background.jpg') no-repeat center center fixed; /* Add your background image URL */
+            background-size: cover;
+            color: #f5f5f5;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        .image-upload { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .image-upload div { flex-basis: 48%; }
+        .image-preview img, .image-preview video { width: 100%; height: auto; margin-top: 10px; display: none; } /* Initially hide the img element */
+        .predict-button { display: flex; justify-content: center; margin-top: 20px; }
+        label { display: block; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Morphological Techniques</h1>
+        <form class="p-3" action="/" method="post" enctype="multipart/form-data">
+            <div class="image-upload">
+                <div>
+                    <label for="image1">Image 1 Input</label>
+                    <input class="form-control" type="file" id="image1" name="image1" required onchange="previewImage('image1', 'imgPreview1');">
+                    <img id="imgPreview1" src="#" alt="Image 1 Preview" class="img-fluid"/>
+                </div>
+                <div>
+                    <label for="image2">Image 2 Input</label>
+                    <input class="form-control" type="file" id="image2" name="image2" required onchange="previewImage('image2', 'imgPreview2');">
+                    <img id="imgPreview2" src="#" alt="Image 2 Preview" class="img-fluid"/>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="method">Select Processing Method:</label>
+                <select class="form-control" id="method" name="method">
+                    <option value="gaussian">Facial Reconstruction technique using Laplacian and Gaussian Pyramids</option>
+                    <option value="video">Affline Transform</option>
+                    <option value="Linear">Linear Intepolation</option>
+                    <option value="Feature">Feature Based Morphing</option>
+                    <option value="Weighted_Average">Weighted Average Morphing</option>
+                </select>
+            </div>
+            <div class="predict-button">
+                <input class="btn btn-primary" type="submit" value="Preprocess the Image">
+            </div>
+        </form>
+        {% if output_image_url %}
+        <div class="text-center">
+            <h2>Output Image</h2>
+            <img src="{{ output_image_url }}" alt="Output Image" class="img-fluid"/>
+        </div>
+        {% endif %}
+
+        {% if output_video_url %}
+        <div class="text-center">
+            <h2>Output Video</h2>
+            <video width="640" height="480" controls>
+                <source src="{{ output_video_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function previewImage(inputId, imgId) {
+            var fileInput = document.getElementById(inputId);
+            var imagePreview = document.getElementById(imgId);
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Make the image visible
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

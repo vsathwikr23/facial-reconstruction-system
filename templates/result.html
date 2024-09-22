@@ -1,0 +1,24 @@
+<!-- ... other parts of your HTML remain the same ... -->
+
+<div class="image-upload">
+    <div>
+        <label for="image1"><i class="fas fa-upload"></i> Image 1 Input</label>
+        <input class="form-control" type="file" id="image1" name="image1" required onchange="previewImage('image1', 'imgPreview1');">
+        <div id="imgPreview1" class="image-preview" data-placeholder="Image 1 Preview"></div>
+    </div>
+    <div>
+        <label for="image2"><i class="fas fa-upload"></i> Image 2 Input</label>
+        <input class="form-control" type="file" id="image2" name="image2" required onchange="previewImage('image2', 'imgPreview2');">
+        <div id="imgPreview2" class="image-preview" data-placeholder="Image 2 Preview"></div>
+    </div>
+</div>
+
+<div class="select-method mb-3">
+    <!-- Your select method dropdown -->
+</div>
+
+<div class="predict-button">
+    <!-- Your preprocess image button -->
+</div>
+
+<!-- ... rest of your HTML ... -->
